@@ -10,3 +10,20 @@ layout: default
 RIF Identity is the identity and reputation layer within the RIF ecosystem. It is meant to allow users to easily control their IDs to interact in decentralized economies while building a self-sovereign reputation. This will enable people, especially those excluded from the traditional financial system, to participate in the decentralized digital economy of the future.
 
 The main goal of RIF Identity is to protect users’ personal data, empowering them to manage who can access it and giving them full control of their reputation so they can use it to interact with multiple marketplaces and platforms with freedom to move from one to another without losing their track record, contacts and social value.
+
+## Table of contents
+
+- [Self-sovereign identity](/ssi)
+    - [Specs](/ssi/specs)
+    - [Architecture](/ssi/architecture)
+    - [Libraries](/ssi/libraries)
+    - [Services](/ssi/services)
+    - [Applications](/ssi/applications)
+    - [FAQ](ssi/faq)
+
+<!--
+- RIF Identity manager
+- Data Vault
+- rLogin
+- RIF Name Service
+-->
