@@ -33,11 +33,13 @@ Imagine what would happen if each time you present your national identity card y
 
 This schema is based on BIP-32<sup><a href="#ref-4">4</a></sup> hierarchical deterministic derivations of public keys. With a seed you can create multiple private keys, that private keys control multiple identities. These identities, as far as the model is correctly designed, do not share information that can associate one with another.
 
+The derivation path used for RSK is `m/44'/137'/0'/0/i`<sup><a href="#ref-5">5</a></sup> where `i` is used to index different identities.
+
 ![multi_identity_model](/assets/img/ssi/04_multi_identity_model.png)
 
 ## Verifiable credentials model
 
-Credentials are a part of our daily lives; driver's licenses are used to assert that we are capable of operating a motor vehicle, university degrees can be used to assert our level of education, and government-issued passports enable us to travel between countries.<sup><a href="#ref-5">5</a></sup> 
+Credentials are a part of our daily lives; driver's licenses are used to assert that we are capable of operating a motor vehicle, university degrees can be used to assert our level of education, and government-issued passports enable us to travel between countries.<sup><a href="#ref-6">6</a></sup> 
 
 If credentials are cryptographically signed, the holder of the credential does not need any action on the issuer to prove that credential was issued by it. In addition, the identity controller of the subject that that credential was issued to can provide a cryptographic proof expressing control of the identity. With this proof schema the verification for a credential presentation consists of proving two cryptographically signed messages.
 
@@ -66,6 +68,5 @@ This three entities can perform 4 different basic actions:
 2. <span id="ref-2"></span> [Decentralized Identifiers (DIDs) v1.0](https://w3c.github.io/did-core/)
 3. <span id="ref-3"></span> [ETHR DID Method Specification](https://github.com/decentralized-identity/ethr-did-resolver/blob/master/doc/did-method-spec.md)
 4. <span id="ref-4"></span> [BIP-0032 - Hierarchical Deterministic Wallets](https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki)
-5. <span id="ref-5"></span> [Verifiable Credentials Data Model 1.0](https://www.w3.org/TR/vc-data-model/)
-
-
+5. <span id="ref-5"></span> [RSKIP-0057 - Derivation Path for Hierarchical Deterministic Wallets](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP57.md)
+6. <span id="ref-6"></span> [Verifiable Credentials Data Model 1.0](https://www.w3.org/TR/vc-data-model/)
