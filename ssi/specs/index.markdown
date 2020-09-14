@@ -72,14 +72,13 @@ This three entities can perform 4 different basic actions:
 
 ## Protocols
 
-- Identity layout - create and recover identities
-- Storing and recovering encrypted information
-- DID authentication - a challenge–response authentication model
-- Transmitting and receiving declarative details
-- Transmitting and receiving credentials
-- Credential requests protocol - a simple protocol for _credential requests_
-- The Convey service - transport content that does not fit into a QR code
-- Validating a presentation with timestamps
+- [Identity layout](./identity-layout) - create and recover identities
+- [Encryption layout](./encryption-layout) - Storing and recovering encrypted information
+- [DID authentication](./did-auth) - a challenge–response authentication model based on DIDs
+- [Declarative details comms](./comm-declarative-details) - transmitting and receiving declarative details
+- [Credential requests protocol](./credential-requests) - a simple protocol for request, grant and receive credential case
+- [The Convey service](./convey-service) - transport content that does not fit into a QR code
+- [Presentations timestamps](./presentation-timestamps) - emitting and validating presentations with timestamps
 
 ## References
 
