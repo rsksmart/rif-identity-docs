@@ -20,10 +20,20 @@ The main goal of RIF Identity is to protect users’ personal data, empowering t
     - [Services](/ssi/services)
     - [Applications](/ssi/applications)
     - [FAQ](ssi/faq)
+- [Data Vault](/data-vault)
+- RIF Identity manager
+- rLogin
+
+## Repos
+
+- Documentation - https://github.com/rsksmart/rif-identity-docs
+- Javascript monorepo - https://github.com/rsksmart/rif-identity.js
+- Node.js Services - https://github.com/rsksmart/rif-identity-services
+- React.js and React Native apps - https://github.com/rsksmart/rif-identity-ui
+- Data vault - https://github.com/rsksmart/rif-data-vault
+- r Loign POC - https://github.com/rsksmart/rif-login-poc
+- RIF Identity manager POC - https://github.com/rsksmart/rif-identity-manager
 
 <!--
-- RIF Identity manager
-- Data Vault
-- rLogin
-- RIF Name Service
+
 -->
