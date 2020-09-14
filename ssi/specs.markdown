@@ -45,7 +45,7 @@ The master key entropy is represented by a BIP-39 mnemonic phrase<sup><a href="#
 
 ## Verifiable credentials model
 
-Credentials are a part of our daily lives; driver's licenses are used to assert that we are capable of operating a motor vehicle, university degrees can be used to assert our level of education, and government-issued passports enable us to travel between countries.<sup><a href="#ref-7">7</a></sup> 
+Credentials are a part of our daily lives; driver's licenses are used to assert that we are capable of operating a motor vehicle, university degrees can be used to assert our level of education, and government-issued passports enable us to travel between countries.<sup><a href="#ref-7">7</a></sup>
 
 If credentials are cryptographically signed, the holder of the credential does not need any action on the issuer to prove that credential was issued by it. In addition, the identity controller of the subject that that credential was issued to can provide a cryptographic proof expressing control of the identity. With this proof schema the verification for a credential presentation consists of proving two cryptographically signed messages.
 
@@ -69,6 +69,17 @@ This three entities can perform 4 different basic actions:
 - Verify presentations
 
 > RIF Identity expresses support for _Verifiable Credentials Data Model 1.0_
+
+## Protocols
+
+- Identity layout - create and recover identities
+- Storing and recovering encrypted information
+- DID authentication - a challenge–response authentication model
+- Transmitting and receiving declarative details
+- Transmitting and receiving credentials
+- Credential requests protocol - a simple protocol for _credential requests_
+- The Convey service - transport content that does not fit into a QR code
+- Validating a presentation with timestamps
 
 ## References
 
