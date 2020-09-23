@@ -35,13 +35,13 @@ did:ethr:rsk:testnet:0x487ff2e63c8f89a97b6f92d184e2e80fdcdc6ee6
 
 Imagine what would happen if each time you present your national identity card you reveal your blockchain address which can show the amount of funds you have and historical transaction information. To enable users keep their data private and safe, RIF Identity specifies a deterministic identity derivation standard schema that will allow users to obtain multiple public identities for free with the guarantee of recovery on any device.
 
-This schema is based on BIP-32{% include ref.html id="4" %} hierarchical deterministic derivations of public keys. With a seed you can create multiple private keys, that private keys control multiple identities. These identities, as far as the model is correctly designed, do not share information that can associate one with another.
+This schema is based on BIP-32{% include ref.html id="5" %} hierarchical deterministic derivations of public keys. With a seed you can create multiple private keys, that private keys control multiple identities. These identities, as far as the model is correctly designed, do not share information that can associate one with another.
 
-The master key entropy is represented by a BIP-39 mnemonic phrase{% include ref.html id="5" %}. The derivation path used for RSK is `m/44'/137'/0'/0/i`{% include ref.html id="6" %} where `i` is used to index different identities.
+The master key entropy is represented by a BIP-39 mnemonic phrase{% include ref.html id="4" %}. The derivation path used for RSK is `m/44'/137'/0'/0/i`{% include ref.html id="6" %} where `i` is used to index different identities.
 
 ![multi_identity_model](/assets/img/ssi/04_multi_identity_model.png)
 
-> RIF Identity expresses support for _BIP-32_ and _BIP-39_
+> RIF Identity expresses support for _BIP-32_, _BIP-39_ and _RSKIP-57_
 
 ## Verifiable credentials model
 
