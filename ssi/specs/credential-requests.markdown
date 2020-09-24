@@ -30,3 +30,7 @@ The schema that is used to share credentials and declarative details in the cred
 
 - Support DID Document service detection - allow the holder to find the issuer's service endpoint using its DID Document
 - Provide a standard API to be implemented by holders
+
+## Implementations
+
+- [RIF Identity services - issuer app](https://github.com/rsksmart/rif-identity-services)
