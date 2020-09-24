@@ -4,6 +4,8 @@ layout: default
 
 # References
 
+<!-- please don't reorder or delete, just append -->
+
 1. <span id="ref-1"></span> [RFC-7519 - JSON Web Token (JWT)](https://tools.ietf.org/html/rfc7519)
 2. <span id="ref-2"></span> [Decentralized Identifiers (DIDs) v1.0](https://w3c.github.io/did-core/)
 3. <span id="ref-3"></span> [Ethr DID Method Specification](https://github.com/decentralized-identity/ethr-did-resolver/blob/master/doc/did-method-spec.md)
@@ -13,6 +15,8 @@ layout: default
 7. <span id="ref-7"></span> [Verifiable Credentials Data Model 1.0](https://www.w3.org/TR/vc-data-model/)
 8. <span id="ref-8"></span> [Ethereum: A secure decentralised generalised transaction ledger (yellow paper)](https://ethereum.github.io/yellowpaper/paper.pdf)
 9. <span id="ref-9"></span> [BIP-44 - Multi-Account Hierarchy for Deterministic Wallets](https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki)
+10. <span id="ref-10"></span> [Wikipedia - Challenge–response authentication](https://en.wikipedia.org/wiki/Challenge%E2%80%93response_authentication)
+11. <span id="ref-11"></span> [RFC-1994 - PPP Challenge Handshake Authentication Protocol (CHAP)](https://tools.ietf.org/html/rfc1994)
 
 <script type="text/javascript">
   if (window.location.hash) {
