@@ -8,13 +8,7 @@ As described [here](../specs/#multi-identity-model) RIF Identity proposes a stan
 
 Technically, a user is going to save a seed that the wallets will use to create different private keys in a deterministic way. If all the wallets follow the same algorithm to create accounts, it can be achieved that any wallet can correctly recover which accounts have been used before.
 
-Some definitions:
-
-- RIF Identity account (RIA): is a free account that is held by any mnemonic phrase holder
-- Mnemonic phrase: a phrase of words that is securely random created and can be used to obtain a seed from it
-- Seed: secret entropy that is used to derive private keys
-- HD Key: a cryptographic system that allows to derive private keys from a seed
-- Persona: is the representation of each of the identities that are derived from a RIF Identity account
+> Please make use of [this section](/definitions) for core concept definitions
 
 So, any user can hold a mnemonic phrase to access to their RIF Identity account, and from that account obtain different public Personas.
 
@@ -40,8 +34,7 @@ Each persona has a public identity identifier. The identifier is used in differe
 3. The DID for RSK (Mainnet) is `did:ethr:rsk:A(pr)`, and for RSK Testnet `did:ethr:rsk:testnet:A(pr)`
 
   > Checksum encoding in the address is not required but must be validated if received
-
-> 
+
 
 ### Create a new RIA, and obtain the first persona
 
@@ -49,18 +42,10 @@ For new users
 
 1. Create a new BIP-39{% include ref.html id="4" %} compliant mnemonic phrase - for security reasons we recommend to use at least 12 words
 3. Calculate seed from mnemonic phrase
-
-  > Implementation: [`@rsksmart/rif-id-mnemonic`](https://github.com/rsksmart/rif-identity.js/tree/develop/packages/rif-id-mnemonic)
-
 4. Use calculated seed as entropy to create an HD Key following BIP-32{% include ref.html id="5" %}
 5. Get an HD Key from a derivation path respecting RSKIP-57{% include ref.html id="6" %} - RSK MainNet is	`m/44'/137'/0'/0/n` with `n` a nonce to obtain different accounts.
-
-  > Implementation: [`@rsksmart/rif-id-ethr-did`](https://github.com/rsksmart/rif-identity.js/tree/develop/packages/rif-id-ethr-did)
-
 6. Use `n=0` private key as the first persona private key
 7. Memoize the last nonce used is `0`
-
-  > Implementation: [`@rsksmart/rif-id-daf`](https://github.com/rsksmart/rif-identity.js/tree/develop/packages/rif-id-ethr-did) - it memoize derived indexes in a local database
 
 ### Obtain a new persona
 
@@ -73,6 +58,8 @@ For users that already have a RIA
 ### Recover all the used personas
 
 For users that already had a RIA when accessing first time to the wallet.
+
+This protocol is based on BIP-44{% include ref.html id="9" %} account discovery, the difference is that the accounts are marked as used also querying information that is not transactions.
 
 1. Follow steps 3. to 5. of _create new RIA_ protocol
 2. Let `i` be 0

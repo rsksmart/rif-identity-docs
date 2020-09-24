@@ -12,6 +12,7 @@ layout: default
 6. <span id="ref-6"></span> [RSKIP-0057 - Derivation Path for Hierarchical Deterministic Wallets](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP57.md)
 7. <span id="ref-7"></span> [Verifiable Credentials Data Model 1.0](https://www.w3.org/TR/vc-data-model/)
 8. <span id="ref-8"></span> [Ethereum: A secure decentralised generalised transaction ledger (yellow paper)](https://ethereum.github.io/yellowpaper/paper.pdf)
+9. <span id="ref-9"></span> [BIP-44 - Multi-Account Hierarchy for Deterministic Wallets](https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki)
 
 <script type="text/javascript">
   if (window.location.hash) {
