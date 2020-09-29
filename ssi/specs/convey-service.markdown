@@ -21,7 +21,7 @@ Send a message:
 
 Resolve a message:
 
-4. Bob scans the QR and gets the URI. Bob received the encrypted file's CID and the decryption key.
+1. Bob scans the QR and gets the URI. Bob received the encrypted file's CID and the decryption key.
 6. Bob resolves the uri and gets the encrypted file
     ```
     If the Convey service is known by Bob
