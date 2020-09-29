@@ -22,7 +22,7 @@ Send a message:
 Resolve a message:
 
 1. Bob scans the QR and gets the URI. Bob received the encrypted file's CID and the decryption key.
-6. Bob resolves the uri and gets the encrypted file
+2. Bob resolves the uri and gets the encrypted file
     ```
     If the Convey service is known by Bob
         Bob requests file to the Convey service
@@ -34,8 +34,8 @@ Resolve a message:
     Otherwise
         Bob could not find the file => reject.
     ```
-7. Bob compares the encrypted file CID with the received CID
-6. Bob decrypts the encrypted file with the received key
+3. Bob compares the encrypted file CID with the received CID
+4. Bob decrypts the encrypted file with the received key
 
 > Alice and Bob must know what encryption algorithm was used to encrypt the file
 
