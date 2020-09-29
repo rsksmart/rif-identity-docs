@@ -8,7 +8,7 @@ Users can build their self-sovereign identity by interacting with different serv
 
 This protocol is held by two entities: the _issuer_ and the _holder_. The issuer is a public entity that issues a specific type of credential, the holder is a user who wishes to acquire that credential. The issuer may require the holder to share specific information. This information can be either data input by the user in a declarative way (declarative details) or other credentials issued by the same issuer or another entity.
 
-One important aspect considered is that the holder has an application were they can confirm or reject information sharing. The application must display clear explanation of the information that is going to be shared and the user must be able to accept it with "manual" input Other important aspect considered in the protocol is that the issuance of the credential may be granted after user "manual" approval. For example, a web platform could display all _pending_ credential request and grant it or deny it manually.
+One important aspect considered is that the holder has an application were they can confirm or reject information sharing. The application must display clear explanation of the information that is going to be shared and the user must be able to accept it with "manual" input. Other important aspect considered in the protocol is that the issuance of the credential may be granted after user "manual" approval. For example, a web platform could display all _pending_ credential requests and grant or deny them manually.
 
 It is assumed that the identity requesting the credential is trusted by the issuer.
 
