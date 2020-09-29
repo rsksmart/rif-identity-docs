@@ -28,7 +28,7 @@ The access credential issued by Bob can be reused until `expirationDate` value.
 
 The authentication protocol can be modified to avoid using selective disclosure request. This is useful when the service does not need to request credentials to the user.
 
-Also, it can be modified to user just a token, without reusable credentials. A simple implementation could require Alice to request a challenge for each interaction with the service. A smarter implementation would respond a new challenge after each interaction, Alice will need to make only one extra request to get the first challenge.
+This protocol can be modified to use disposable tokens, without reusable credentials. A simple implementation may require Alice to request a new challenge for each interaction with the service. A smarter implementation would respond with a new challenge after each interaction, so Alice will need to save the next challenge to be used and the protocol will prompt _Alice_ to make only one extra request to get the first challenge.
 
 ## Sequence diagram
 
