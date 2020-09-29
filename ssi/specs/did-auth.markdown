@@ -12,7 +12,7 @@ It is designed to:
 
 - Let the application request the user to share specific information that can be verified - this information can be used in business logic to grant or deny access
 - Allow the user to opt-in or out to the information - it is a user-centric protocol, the user decides wether to share the information or not
-- Provide the user an access credential that can be reused - wallet systems usually request user action to sign messages, enabling reusing access credentials the amount of signatures required and improves the user experience
+- Provide an access credential to the user that can be reused - wallet systems usually request user action to sign messages, enabling reusing access credentials reduces the amount of signatures required and improves the user experience
 
 It uses HTTPS as the message transport layer.
 
