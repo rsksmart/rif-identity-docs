@@ -4,9 +4,7 @@ layout: default
 
 ## Convey service
 
-### Features
-
-The Convey service has been built to act as a content relayer in front of IPFS. Let's imagine that _Alice_ wants to share some content with _Bob_ through a QR code (or any other limited transport). If the content is too large, it will not fit in a QR code, so there is where the Convey service acts. The service exposes two main endpoints: POST and GET files. Please refer to the protocol description [here](../specs/convey-service) for more details about it.
+The Convey service has been built to act as a content relayer in front of IPFS. Let's imagine that _Alice_ wants to share a JWT with _Bob_ through a QR code. If the content is too large, it will not fit in a QR code, so there is where the Convey service acts. It allows to transport and caché files that can be accessed via HTTPS, and provides a tiny URL that can fit in any QR code. The service exposes two main endpoints: POST and GET files. Please refer to the protocol description [here](../specs/convey-service) for more details about it.
 
 ### Main flows
 
@@ -70,10 +68,10 @@ login()
 2. _Alice_ scans the QR and receive the convey formatted uri
 3. _Alice_ gets the CID and encryption key (if provided) from the received uri and builds and HTTP url as the following: `http://{conveyService}/file/{CID}`
 4. _Alice_ tries to [get](#get-file) the content from the _**Convey service**_
-5. If found, the _**Convey service**_ will return a JSON with the file
-5b. If not found, the _**Convey service**_ will return an HTTP 404.
-6b. _Alice_ will get the file from the IPFS Gateway (`https://{ipfsGateway}/ipfs/{CID}`)
-7. If the content was encrypted, _Alice_ decrypts it with the key and gets the original file
+5. If found, the _**Convey service**_ will return a JSON with the file. If not found,
+  6. the _**Convey service**_ will return an HTTP 404.
+  7. _Alice_ will get the file from the IPFS Gateway (`https://{ipfsGateway}/ipfs/{CID}`)
+7. The content is encrypted, _Alice_ decrypts it with the key and gets the original file
 
 _Example_
 
@@ -91,7 +89,11 @@ login()
 
 ### API
 
-#### POST /request-auth
+#### Authentication
+
+This service uses a simplified version of [`DID Auth protocol`](/ssi/sepcs/did-auth)
+
+##### POST /request-auth
 
 Generates a random 64 bytes challenge that is associated to the received DID.
 It is part of the implementation of the [DID Authentication](../specs/did-auth) protocol
@@ -118,7 +120,7 @@ axios.post(`${serviceUrl}/request-auth`, { did })
     .then(challenge => console.log(`The challenge is: ${challenge}`))
 ```
 
-#### POST /auth
+##### POST /auth
 
 Verifies challenge and did of the received VC, if it is ok, it emits another VC and responds with the JWT representation of it. It will act as the authentication token.
 It is part of the implementation of the [DID Authentication](../specs/did-auth) protocol.
@@ -167,7 +169,11 @@ axios.post(`${serviceUrl}/auth`, { jwt }))
     .then(token => console.log(`The authentication token is: ${token}`))
 ```
 
-#### POST /file
+#### Convey files
+
+Use this API to send and receive files using the convey
+
+##### POST /file
 
 It stores the file in IPFS and then saves in the service memory the original content associated to its IPFS hash (cid)
 
@@ -199,7 +205,7 @@ axios.post(`${serviceUrl}/file`, { file: encrypted }, { headers: { 'Authorizatio
     .then({ cid, url } => console.log(`The Convey uri: ${url}. The CID: ${cid}`))
 ```
 
-#### GET /file
+##### GET /file
 
 It looks for the given CID in the service memory and responds with it in case it is found. If not, returns an HTTP 404.
 
