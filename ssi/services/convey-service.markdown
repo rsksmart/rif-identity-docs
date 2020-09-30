@@ -23,6 +23,12 @@ _Example_
 ```javascript
 import axios from 'axios'
 import { createVerifiableCredentialJwt } from 'did-jwt-vc'
+import RSKEthrDID from '@rsksmart/ethr-did'
+
+const identity = new RSKEthrDID({ 
+    address: '0xDe9D2B98E1c23E2765c06C5057723a6c1c453147',
+    privateKey: '2f86e57652ee906707d4415105228b4fda7b1b900cfd0871cd5d17277ad084b8'
+})
 
 axios.post(`${serviceUrl}/request-auth`, { did: identity.did })
   .then(res => res.status === 200 && !!res.data && res.data.challenge)
@@ -78,7 +84,11 @@ _Example_
 ```javascript
 import axios from 'axios'
 
-const { cid, encryptionKey } = theOnesGottenFromTheQr
+const qrContent = `convey://${cid}#${ecKey}`
+
+const index = 'convey://'.length
+const identifier = uri.substring(index)
+const [cid, encryptionKey] = identifier.split('#')
 
 login()
   .then(token => axios.get(`${serviceUrl}/file/${cid}`, { headers: { 'Authorization': token }))
