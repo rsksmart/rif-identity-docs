@@ -10,7 +10,6 @@ This protocol is held by two entities: the _issuer_ and the _holder_. The issuer
 
 One important aspect considered is that the holder has an application were they can confirm or reject information sharing. The application must display clear explanation of the information that is going to be shared and the user must be able to accept it with "manual" input. Other important aspect considered in the protocol is that the issuance of the credential may be granted after user "manual" approval. For example, a web platform could display all _pending_ credential requests and grant or deny them manually.
 
-It is assumed that the identity requesting the credential is trusted by the issuer.
 
 The schema that is used to share credentials and declarative details in the credential request is not specified, and neither a discovery method for this schema. The holder should know what credentials and decalrative details are requested by the issuer.
 
