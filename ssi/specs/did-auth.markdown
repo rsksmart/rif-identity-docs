@@ -32,7 +32,7 @@ This protocol can be modified to use disposable tokens, without reusable credent
 
 ## Sequence diagram
 
-![](/assets/img/ssi/08_did_auth.png)
+![did auth]({{ site.baseurl }}/assets/img/ssi/08_did_auth.png)
 
 ### Open work
 
@@ -41,5 +41,5 @@ This protocol can be modified to use disposable tokens, without reusable credent
 
 ### Implementations
 
-- [`@rskmsart/rif-id-did-auth`](#)
-- [RIF Data Vault authentication](/data-vault/architecture/auth)
+- [`@rskmsart/rif-id-did-auth`](../libraries/express-did-auth)
+<!-- - [RIF Data Vault authentication]({{ site.baseurl }}/data-vault/architecture/auth) -->
