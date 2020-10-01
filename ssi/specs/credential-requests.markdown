@@ -23,7 +23,7 @@ The schema that is used to share credentials and declarative details in the cred
 
 ## Sequence diagram
 
-![credential requests](/assets/img/ssi/09_credential_requests.png)
+![credential requests]({{ site.baseurl }}/assets/img/ssi/09_credential_requests.png)
 
 ### Open work
 

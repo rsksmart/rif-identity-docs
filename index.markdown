@@ -13,27 +13,25 @@ The main goal of RIF Identity is to protect users’ personal data, empowering t
 
 ## Table of contents
 
-- [Self-sovereign identity](/ssi)
-    - [Specs](/ssi/specs)
-    - [Architecture](/ssi/architecture)
-    - [Libraries](/ssi/libraries)
-    - [Services](/ssi/services)
-    - [Applications](/ssi/applications)
+- [Self-sovereign identity](./ssi)
+    - [Specs](./ssi/specs)
+    - [Architecture](./ssi/architecture)
+    - [Libraries](./ssi/libraries)
+    - [Services](./ssi/services)
+    - [Applications](./ssi/applications)
     - [FAQ](ssi/faq)
-- [Data Vault](/data-vault)
-- RIF Identity manager
+- [Data Vault](./data-vault)
 - rLogin
+- RIF Identity manager
 
 ## Repos
 
-- Documentation - https://github.com/rsksmart/rif-identity-docs
-- Javascript monorepo - https://github.com/rsksmart/rif-identity.js
-- Node.js Services - https://github.com/rsksmart/rif-identity-services
-- React.js and React Native apps - https://github.com/rsksmart/rif-identity-ui
-- Data vault - https://github.com/rsksmart/rif-data-vault
-- r Loign POC - https://github.com/rsksmart/rif-login-poc
-- RIF Identity manager POC - https://github.com/rsksmart/rif-identity-manager
-
-<!--
-
--->
+- [Documentation](https://github.com/rsksmart/rif-identity-docs)
+- [SSI Javascript monorepo](https://github.com/rsksmart/rif-identity.js)
+- [Node.js Services](https://github.com/rsksmart/rif-identity-services)
+- [React.js and React Native apps](https://github.com/rsksmart/rif-identity-ui)
+- [Data vault Javascript monorepo](https://github.com/rsksmart/rif-data-vault)
+- [Ethr DID + RSK support](https://github.com/rsksmart/ethr-did)
+- [Ethr DID dev utils](https://github.com/rsksmart/ethr-did-utils)
+<!-- - [rLoign](https://github.com/rsksmart/rLogin)
+- [RIF Identity manager](https://github.com/rsksmart/rif-identity-manager) -->

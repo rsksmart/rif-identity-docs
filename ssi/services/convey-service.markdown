@@ -4,15 +4,15 @@ layout: default
 
 ## Convey service
 
-The Convey service has been built to act as a content relayer in front of IPFS. Let's imagine that _Alice_ wants to share a JWT with _Bob_ through a QR code. If the content is too large, it will not fit in a QR code, so there is where the Convey service acts. It allows to transport and caché files that can be accessed via HTTPS, and provides a tiny URL that can fit in any QR code. The service exposes two main endpoints: POST and GET files. Please refer to the protocol description [here](../specs/convey-service) for more details about it.
+The Convey service has been built to act as a content relayer in front of IPFS. Let's imagine that _Bob_ wants to share a JWT with _Alice_ through a QR code. If the content is too large, it will not fit in a QR code, so there is where the Convey service acts. It allows to transport and caché files that can be accessed via HTTPS, and provides a tiny URL that can fit in any QR code. The service exposes two main endpoints: POST and GET files. Please refer to the protocol description [here](../specs/convey-service) for more details about it.
 
 ### Main flows
 
-#### Login
+#### Authentication flow
 
-1. _Bob_ [requests to login](#request-auth) to the _**Convey service**_ by sending it's [DID](https://w3c.github.io/did-core/)
+1. _Bob_ [requests to login](#post-request-auth) to the _**Convey service**_ by sending it's [DID](https://w3c.github.io/did-core/)
 2. The _**Convey service**_ responds with a challenge
-3. _Bob_ signs a VC with that challenge and send it to the _**Convey service**_ to [authenticate](#auth)
+3. _Bob_ signs a VC with that challenge and send it to the _**Convey service**_ to [authenticate](#post-auth)
 4. _**Convey service**_ verifies the received challenge and validates that the signer is the same that _Bob_ provided in _step 1_. If it is ok, it responds with an authentication token
 5. _Bob_ saves that authentication token to be used on each interaction with the _**Convey service**_
 
@@ -49,7 +49,7 @@ axios.post(`${serviceUrl}/request-auth`, { did: identity.did })
 
 #### Post and share content
 
-1. _Bob_ does the [login](#login) process
+1. _Bob_ does the [authentication flow](#authentication-flow)
 2. _Bob_ [posts](#post-file) some content (ideally [encrypted](../specs/encryption-layout)) to the _**Convey service**_
 3. _**Convey service**_ puts it in IPFS and store its CID (associated to the original file) in memory. It responds with the [CID](https://docs.ipfs.io/concepts/content-addressing/) of the saved content and the convey formatted uri (see the [protocol](../specs/convey-service))
 4. _Bob_ builds a QR code with the received convey formatted uri (and the encryption key in case the content needs to be decrypted) with the format `convey://{CID}#{key}`
@@ -70,7 +70,7 @@ login()
 
 #### Receive shared content
 
-1. _Alice_ does the [login](#login) process
+1. _Alice_ does the [authentication flow](#authentication-flow)
 2. _Alice_ scans the QR and receive the convey formatted uri
 3. _Alice_ gets the CID and encryption key (if provided) from the received uri and builds and HTTP url as the following: `http://{conveyService}/file/{CID}`
 4. _Alice_ tries to [get](#get-file) the content from the _**Convey service**_
