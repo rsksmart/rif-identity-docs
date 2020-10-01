@@ -4,10 +4,12 @@ layout: default
 
 ## Issuer App
 
-The Issuer App is a React application that handles the back office tasks of issuing and rejecting credential requests. It is built to be connected to any Request Credential Service Server and login happens with a username and password.
+The Issuer App is a React application that handles the back office tasks of issuing and rejecting credential requests. It is built to be connected to any Request Credential Service Server (that is API compatible with [RIF Identity issuer service](/ssi/services)), and login happens with a username and password.
 
 ### Features
 
+- Login using HTTP Basic Auth with username and password
+- View list of received credential requests and request content
 - Issue and Deny Verifiable Credentials
 
 ### Screenshots

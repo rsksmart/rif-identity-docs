@@ -4,16 +4,20 @@ layout: default
 
 # Holder App
 
-The holder app is used to store the declarative details and credentials of its users. Built-in React Native it can be packaged for both IOS and Android, however, Android is the only officially supported platform. 
+The holder app is a wallet that can be used to store the declarative details and credentials of its users. Built-in React Native it can be packaged for both IOS and Android, however, Android is the only officially supported platform.
+
+Its features and visual components are developed for future support of a UI library enabling seamless access to SSI basic user information
 
 ## Features
 
 - Creates an Identity based on a 12 seed mnemonic.
-- Multilanguage interface with English and Spanish currently translated.
-- Saves declarative details about the user and backs them up in the data vault. These details are shared when the user requests credentials
-- Requests credentials from a single credential server and holds them until the issuer approves or denies the request.
-- Saves Issued Credentials in its internal database and then backs them up in the data vault.
+- Internationalization - currently Spanish and English support, it is easy to extend to new languages.
+- Saves declarative details about the user and backs them up in the [data vault](/data-vault). These details are shared when the user requests credentials.
+- Requests credentials to issuer service, and hold request information until the issuer approves or denies the request (following [this protocol](/ssi/specs/credential-requests)).
+- Saves received Credentials in its internal database and then backs them up in the data vault.
 - Creates Presentations of Verifiable Credentials to share with the Verifier app.
+
+Read [this document](/ssi/specs) to learn more about how Self-sovereign identity is designed.
 
 ## Flow + Screenshots
 
@@ -83,7 +87,7 @@ The user can change any of these variables in the advanced settings screen. Once
 
 ### Nodify
 
-The Holder app runs React Native which requires packages found in the browser but not on the phone. As such, multiple packages are replaced using nodify. These are installed after the initial yarn command. There are two additional patches that need to be made after the installation process.
+The Holder app runs React Native which requires packages only found in Node.js. As such, multiple packages are replaced using [`rn-nodify`](https://openbase.io/js/rn-nodeify/documentation). These are installed after the initial yarn command. There are two additional patches that need to be made after the installation process.
 
 #### Modify app-root-path:
 
