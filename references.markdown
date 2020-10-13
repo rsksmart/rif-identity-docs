@@ -17,6 +17,7 @@ layout: default
 9. <span id="ref-9"></span> [BIP-44 - Multi-Account Hierarchy for Deterministic Wallets](https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki)
 10. <span id="ref-10"></span> [Wikipedia - Challenge–response authentication](https://en.wikipedia.org/wiki/Challenge%E2%80%93response_authentication)
 11. <span id="ref-11"></span> [RFC-1994 - PPP Challenge Handshake Authentication Protocol (CHAP)](https://tools.ietf.org/html/rfc1994)
+12. <span id="ref-12"></span> [Verifiable Credentials JSON Schema Specification](https://w3c-ccg.github.io/vc-json-schemas/)
 
 <script type="text/javascript">
   if (window.location.hash) {
