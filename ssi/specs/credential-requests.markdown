@@ -2,7 +2,7 @@
 layout: default
 ---
 
-## Verifiable Credential requests protocol - a simple protocol for request, grant and receive verifiable credential case
+## Verifiable credential requests protocol - a simple protocol for request, grant and receive verifiable credential case
 
 Users can build their self-sovereign identity by interacting with different services that grant them verifiable credentials. Both users and services are identified with decentralized identities (DIDs), and can issue and receive verifiable credentials ("credentials"). The credentials are cryptographically signed, this guarantees non repudiation, issuer authenticity, data integrity and allows the holder of the credential to present it to other entities.
 
