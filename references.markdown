@@ -18,6 +18,8 @@ layout: default
 10. <span id="ref-10"></span> [Wikipedia - Challenge–response authentication](https://en.wikipedia.org/wiki/Challenge%E2%80%93response_authentication)
 11. <span id="ref-11"></span> [RFC-1994 - PPP Challenge Handshake Authentication Protocol (CHAP)](https://tools.ietf.org/html/rfc1994)
 12. <span id="ref-12"></span> [Verifiable Credentials JSON Schema Specification](https://w3c-ccg.github.io/vc-json-schemas/)
+12. <span id="ref-13"></span> [The OAuth 2.0 Authorization Framework](https://tools.ietf.org/html/rfc6749)
+13. <span id="ref-14"></span> [HTTP Authentication Scheme Registry](https://www.iana.org/assignments/http-authschemes/http-authschemes.xhtml)
 
 <script type="text/javascript">
   if (window.location.hash) {
