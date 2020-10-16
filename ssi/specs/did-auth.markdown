@@ -116,7 +116,7 @@ There are different options to send the _access token_ and the _refresh token_. 
 
 ### Access token
 
-#### Headers
+#### Authorization Header
 
 It must be placed in the `Authorization` header following the `DIDAuth` scheme. This scheme will be present in HTTP Authentication Scheme Registry{% include ref.html id="14" %}.
 
@@ -130,7 +130,7 @@ For example:
 
 #### Cookie
 
-When the client performs a `POST /auth`, the server must set the `authorization` cookie with the following attributes: `HttpOnly`, `Secure`. See more information about cookies [here](https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies)
+When the client performs a `POST /auth`, the server must set the `authorization` cookie with the following attributes: `HttpOnly`, `Secure` and `SameSite=Strict`. See more information about cookies [here](https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies)
 
 For example:
 
@@ -144,14 +144,13 @@ Then, the client browser will send the cookie on every request.
 
 #### Body
 
-It must be placed in the body of the request as a `refresh-token` field and the expired `access token` must be sent as well in the [authorization header](#headers).
+It must be placed in the body of the request as a `refresh-token` field.
 
 For example:
 
 ```
   POST /refresh-token HTTP/1.1
   Host: server.example.com
-  Authorization: DIDAuth my.access.token
 
   {
     refresh-token: 'theRefreshToken'
@@ -160,7 +159,7 @@ For example:
 
 #### Cookie
 
-When the client performs a `POST /auth`, the server must set the `refresh-token` cookie with the following attributes: `HttpOnly`, `Secure`. 
+When the client performs a `POST /auth`, the server must set the `refresh-token` cookie with the following attributes: `HttpOnly`, `Secure` and `SameSite=Strict`. 
 
 For example:
 
@@ -176,6 +175,8 @@ Then, the client browser will send the cookie on every request, so when the clie
 <!-- - [RIF Data Vault authentication]({{ site.baseurl }}/data-vault/architecture/auth) -->
 
 ## Extensions
+
+Separate authentication server from resource server
 
 This protocol can be modified to use disposable tokens in order to ensure that the user is always controlling the did, without reusable credentials. A simple implementation may require Alice to request a new challenge for each interaction with the service. A smarter implementation would respond with a new challenge after each interaction, so Alice will need to save the next challenge to be used and the protocol will prompt _Alice_ to make only one extra request to get the first challenge. One of the cons of this approach is that the client will have to sign many times, it may be a limitation from the user experience perspective.
 
