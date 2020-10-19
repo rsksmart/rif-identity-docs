@@ -17,12 +17,26 @@ The main goal of RIF Identity is to protect users’ personal data, empowering t
     - [Specs](./ssi/specs)
     - [Architecture](./ssi/architecture)
     - [Libraries](./ssi/libraries)
+        - `@rsksmart/rif-id-mnemonic`
+        - `@rsksmart/rif-id-ethr-did`
+        - `@rsksmart/rif-id-daf`
+        - `@rsksmart/rif-id-core`
+        - `@rsksmart/express-did-auth`
+        - `@rsksmart/rif-node-utils`
     - [Services](./ssi/services)
+        - Convey service - public transport layer for JWTs using IPFS <!-- TODO: THERE IS A LINK -->
+        - Issuer service - serves for an application that allows receiving credential issuance requests and approving them manually
     - [Applications](./ssi/applications)
+        - Issuer app - application that serves as the credential request manager. It allows to grant-deny requests or revoke existing credentials  <!-- TODO: THERE IS A LINK -->
+        - Holder app - wallet used to store declarative details and credentials of it’s users  <!-- TODO: THERE IS A LINK -->
+        - Verifier app - QR scanner app that verifies Verifiable Presentations
     - [FAQ](ssi/faq)
 - [Data Vault](./data-vault)
-- rLogin
-- RIF Identity manager
+    - Centralized Data Vault provider - an IPFS Data Vault provider
+    - Data Vault service - a Data vault first approach. This service uses an IPFS node to pin files
+    - Web Client SDK - a lightweight web client for the Data Vault service
+- rLogin - a web tool that combines Web3 and W3C standard protocols to manage user's identity
+- RIF Identity manager - a platform where users can manage their personal information and other components that make up their identity
 
 ## Repos
 
@@ -33,5 +47,5 @@ The main goal of RIF Identity is to protect users’ personal data, empowering t
 - [Data vault Javascript monorepo](https://github.com/rsksmart/rif-data-vault)
 - [Ethr DID + RSK support](https://github.com/rsksmart/ethr-did)
 - [Ethr DID dev utils](https://github.com/rsksmart/ethr-did-utils)
-<!-- - [rLoign](https://github.com/rsksmart/rLogin)
-- [RIF Identity manager](https://github.com/rsksmart/rif-identity-manager) -->
+- [rLogin](https://github.com/rsksmart/rLogin)
+- [RIF Identity manager](https://github.com/rsksmart/rif-identity-manager)
