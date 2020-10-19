@@ -17,18 +17,18 @@ The main goal of RIF Identity is to protect users’ personal data, empowering t
     - [Specs](./ssi/specs)
     - [Architecture](./ssi/architecture)
     - [Libraries](./ssi/libraries)
-        - `@rsksmart/rif-id-mnemonic`
-        - `@rsksmart/rif-id-ethr-did`
-        - `@rsksmart/rif-id-daf`
-        - `@rsksmart/rif-id-core`
-        - `@rsksmart/express-did-auth`
-        - `@rsksmart/rif-node-utils`
+        - [Mnemonic module](./ssi/libraries/mnemonics) - identity derivation tools using mnemonic phrases
+        - [RSK Ethr DID](./ssi/libraries/ethr-did) - handle Ethr DID method procedures in RSK network
+        - [uPort DAF bindings](./ssi/libraries/daf) - use uPort agent with [RIF identity multi identity model](./ssi/specs/#multi-identity-model)
+        - [RIF Identity Core](./ssi/libraries/core) - implementation of [RIF Identity protocols](./ssi/specs/#protocols) using DAF agent
+        - [Express DID Auth](./ssi/libraries/express-did-auth) - handle user authentication using W3C credentials
+        - [Node Utils](./ssi/libraries/node-utils) - a suite of handy utils to use in Node.js services
     - [Services](./ssi/services)
-        - Convey service - public transport layer for JWTs using IPFS <!-- TODO: THERE IS A LINK -->
+        - [Convey service](./ssi/services/convey-service) - public transport layer for JWTs using IPFS
         - Issuer service - serves for an application that allows receiving credential issuance requests and approving them manually
     - [Applications](./ssi/applications)
-        - Issuer app - application that serves as the credential request manager. It allows to grant-deny requests or revoke existing credentials  <!-- TODO: THERE IS A LINK -->
-        - Holder app - wallet used to store declarative details and credentials of it’s users  <!-- TODO: THERE IS A LINK -->
+        - [Issuer app](./ssi/applications/issuer-app) - application that serves as the credential request manager. It allows to grant-deny requests or revoke existing credentials
+        - [Holder app](./ssi/applications/holder-app) - wallet used to store declarative details and credentials of it’s users
         - Verifier app - QR scanner app that verifies Verifiable Presentations
     - [FAQ](ssi/faq)
 - [Data Vault](./data-vault)
@@ -49,3 +49,19 @@ The main goal of RIF Identity is to protect users’ personal data, empowering t
 - [Ethr DID dev utils](https://github.com/rsksmart/ethr-did-utils)
 - [rLogin](https://github.com/rsksmart/rLogin)
 - [RIF Identity manager](https://github.com/rsksmart/rif-identity-manager)
+
+
+<!--
+
+MISSING DOCS:
+
+Import READMEs:
+- [Mnemonic module](./ssi/libraries/mnemonics)
+- [RSK Ethr DID](./ssi/libraries/ethr-did)
+- [uPort DAF bindings](./ssi/libraries/daf)
+- [RIF Identity Core](./ssi/libraries/core)
+- [Express DID Auth](./ssi/libraries/express-did-auth)
+- [Node Utils](./ssi/libraries/node-utils)
+
+
+-->
