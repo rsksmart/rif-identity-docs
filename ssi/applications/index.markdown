@@ -4,5 +4,6 @@ layout: default
 
 ## Applications
 
-- [Issuer App](./issuer-app) - React application that handles the administrative tasks of issuing and rejecting credential requests - uses [issuer backend](../services) to handle requests and SSI operations
-- [Holder App](./holder-app) - React Native wallet that holds and requests Verifiable Credentials - uses [user-centric data vault]({{ site.baseurl }}/data-vault) service to store backup of user's SSI properties
+- [Issuer app](./issuer-app) - application that serves as the credential request manager. It allows to grant-deny requests or revoke existing credentials
+- [Holder app](./holder-app) - wallet used to store declarative details and credentials of it’s users
+- [Verifier app](./verifier-app) - QR scanner app that verifies Verifiable Presentations

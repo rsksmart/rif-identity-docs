@@ -25,11 +25,11 @@ The main goal of RIF Identity is to protect users’ personal data, empowering t
         - [Node Utils](./ssi/libraries/node-utils) - a suite of handy utils to use in Node.js services
     - [Services](./ssi/services)
         - [Convey service](./ssi/services/convey-service) - public transport layer for JWTs using IPFS
-        - Issuer service - serves for an application that allows receiving credential issuance requests and approving them manually
+        - [Issuer service](./ssi/services/issuer-service) - serves for an application that allows receiving credential issuance requests and approving them manually
     - [Applications](./ssi/applications)
         - [Issuer app](./ssi/applications/issuer-app) - application that serves as the credential request manager. It allows to grant-deny requests or revoke existing credentials
         - [Holder app](./ssi/applications/holder-app) - wallet used to store declarative details and credentials of it’s users
-        - Verifier app - QR scanner app that verifies Verifiable Presentations
+        - [Verifier app](./ssi/applications/verifier-app) - QR scanner app that verifies Verifiable Presentations
     - [FAQ](ssi/faq)
 - [Data Vault](./data-vault)
     - Centralized Data Vault provider - an IPFS Data Vault provider
@@ -54,7 +54,9 @@ The main goal of RIF Identity is to protect users’ personal data, empowering t
 <!--
 
 MISSING DOCS:
-
+Architecture
+Issuer service
+Verifier app
 Import READMEs:
 - [Mnemonic module](./ssi/libraries/mnemonics)
 - [RSK Ethr DID](./ssi/libraries/ethr-did)
@@ -62,6 +64,5 @@ Import READMEs:
 - [RIF Identity Core](./ssi/libraries/core)
 - [Express DID Auth](./ssi/libraries/express-did-auth)
 - [Node Utils](./ssi/libraries/node-utils)
-
 
 -->
