@@ -72,7 +72,7 @@ This section is OPTIONAL, it depends on the service needings. Some services may 
 ```
 and prompts the _User_ to sign it with her `did`'s private key.
 5. _Client_ sends  `POST /sign-up { response: jwt }` to _Service_
-6. _Service_ verifies JWT signature, checks if the received `challenge` is ok (by calculating the deterministic one again), and performs business logic over the `sdr`. If it is a valid user, it creates an _access token_ and a _refresh token_. 
+6. _Service_ verifies JWT signature, checks if the received `challenge` is ok (by calculating the deterministic one again), and performs business logic over the `sdr`. If it is a valid user, it logges her in by creating an _access token_ and a _refresh token_.
   - The _access token_ is a JWT signed with the service private key. The JWT MUST have, at least, the following payload:
 ```javascript
 {
