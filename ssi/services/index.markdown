@@ -4,9 +4,7 @@ layout: default
 
 ## Services
 
-RIF Self-Sovereign Identity solution provides four main services to interact with:
+RIF Self-Sovereign Identity solution provides two main services to interact with:
 
-- Issuer Back Office - lists all pending credentials and grant/deny each of them
-- Credential Requests - handles all credential requests and issues credentials if they have been granted before
-- Data vault - IPFS pinner/unpinner service and puts/gets/deletes stuff in a centralized key-value DB
-- [Convey](./convey-service) - uploads files to IPFS and caches/serves those cached files
+- [Convey service](./convey-service) - public transport layer for JWTs using IPFS
+- [Issuer service](./issuer-service) - serves for a [web application](../apps/issuer-app) that receives verifiable credential issuance requests and lets the user to manually deny or approve them (thus, issuing the verifiable credential)

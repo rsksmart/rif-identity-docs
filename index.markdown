@@ -20,12 +20,26 @@ The main goal of RIF Identity is to protect users’ personal data in a privacy 
     - [Specs](./ssi/specs)
     - [Architecture](./ssi/architecture)
     - [Libraries](./ssi/libraries)
+        - [Mnemonic module](./ssi/libraries/mnemonics) - identity derivation tools using mnemonic phrases
+        - [RSK Ethr DID](./ssi/libraries/ethr-did) - handle Ethr DID method procedures in RSK network
+        - [uPort DAF bindings](./ssi/libraries/daf) - use uPort agent with [RIF identity multi identity model](./ssi/specs/#multi-identity-model)
+        - [RIF Identity Core](./ssi/libraries/core) - implementation of [RIF Identity protocols](./ssi/specs/#protocols) using DAF agent
+        - [Express DID Auth](./ssi/libraries/express-did-auth) - handle user authentication using W3C credentials
+        - [Node Utils](./ssi/libraries/node-utils) - a suite of handy utils to use in Node.js services
     - [Services](./ssi/services)
+        - [Convey service](./ssi/services/convey-service) - public transport layer for JWTs using IPFS
+        - [Issuer service](./ssi/services/issuer-service) - serves for an application that allows receiving credential issuance requests and approving them manually
     - [Applications](./ssi/applications)
+        - [Issuer app](./ssi/applications/issuer-app) - application that serves as the credential request manager. It allows to grant-deny requests or revoke existing credentials
+        - [Holder app](./ssi/applications/holder-app) - wallet used to store declarative details and credentials of it’s users
+        - [Verifier app](./ssi/applications/verifier-app) - QR scanner app that verifies Verifiable Presentations
     - [FAQ](ssi/faq)
 - [Data Vault](./data-vault)
-- rLogin
-- RIF Identity manager
+    - Centralized Data Vault provider - an IPFS Data Vault provider
+    - Data Vault service - a Data vault first approach. This service uses an IPFS node to pin files
+    - Web Client SDK - a lightweight web client for the Data Vault service
+- rLogin - a web tool that combines Web3 and W3C standard protocols to manage user's identity
+- RIF Identity manager - a platform where users can manage their personal information and other components that make up their identity
 
 ## Repos
 
@@ -36,5 +50,22 @@ The main goal of RIF Identity is to protect users’ personal data in a privacy 
 - [Data vault Javascript monorepo](https://github.com/rsksmart/rif-data-vault)
 - [Ethr DID + RSK support](https://github.com/rsksmart/ethr-did)
 - [Ethr DID dev utils](https://github.com/rsksmart/ethr-did-utils)
-<!-- - [rLoign](https://github.com/rsksmart/rLogin)
-- [RIF Identity manager](https://github.com/rsksmart/rif-identity-manager) -->
+- [rLogin](https://github.com/rsksmart/rLogin)
+- [RIF Identity manager](https://github.com/rsksmart/rif-identity-manager)
+
+
+<!--
+
+MISSING DOCS:
+Architecture
+Issuer service
+Verifier app
+Import READMEs:
+- [Mnemonic module](./ssi/libraries/mnemonics)
+- [RSK Ethr DID](./ssi/libraries/ethr-did)
+- [uPort DAF bindings](./ssi/libraries/daf)
+- [RIF Identity Core](./ssi/libraries/core)
+- [Express DID Auth](./ssi/libraries/express-did-auth)
+- [Node Utils](./ssi/libraries/node-utils)
+
+-->
