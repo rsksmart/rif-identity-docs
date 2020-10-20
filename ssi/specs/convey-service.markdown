@@ -6,9 +6,9 @@ layout: default
 
 A very common functionality nowadays is to allow the user to present their credentials using QR codes. Verifiable credentials can use much space and make the code unable to be displayed on phone screens or scanned by cameras. With that motivation, this protocol is designed to allow transporting a message between two parties, with a third party in the form of a relayer.
 
-Alice: wants to share a file with Bob showing a QR code
-Bob: wants to read the file using a QR code scanner
-Convey service: cachés files and publish files into IPFS
+Alice: wants to share a file with Bob showing a QR code  
+Bob: wants to read the file using a QR code scanner  
+Convey service: cachés and publishes files into IPFS  
 
 Send a message:
 
@@ -17,12 +17,12 @@ Send a message:
 3. The Convey service receives the file and stores it in IPFS, cachés a copy, and sends the CID (content identifier) of the file to _Alice_
 4. Alice receives the CID and verifies it, comparing with the expected CID
 5. Alice gets CID and shares a QR with Bob containing the uri `convey://v1/QmPChd2hVbrJ6bfo3WBcTW4iZnpHm8TEzWkLHmLpXhF68A#secretKey`
-6. Alice show a QR code for this uri
+6. Alice shows a QR code for this URI
 
 Resolve a message:
 
 1. Bob scans the QR and gets the URI. Bob received the encrypted file's CID and the decryption key.
-2. Bob resolves the uri and gets the encrypted file
+2. Bob resolves the URI and gets the encrypted file
     ```
     If the Convey service is known by Bob
         Bob requests file to the Convey service
