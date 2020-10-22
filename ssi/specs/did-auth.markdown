@@ -11,7 +11,7 @@ A challenge–response authentication is a family of protocols in which one part
 - [State of the art](#state-of-the-art)
 - [Motivation](#motivation)
 - [Endpoints](#endpoints)
-  - [Sign up](#sign-up)
+  - [Signup](#signup)
     - [Selective disclosure](#selective-disclosure)
   - [Login](#login)
   - [Logout](#logout)
@@ -51,12 +51,12 @@ It uses HTTPS as the message transport layer.
 
 # Endpoints
 
-## Sign up
+## Signup
 
 This section is OPTIONAL, it depends on the service needings. Some services may not need to register users before letting them enter in.
 
-1. _Client_ sends `POST /request-sign-up { did }` to _Service_, where `did` is _User_'s DID
-2. _Service_ creates a deterministic _challenge_ (see [How to calculate a deterministic challenge](#how-to-calculate-a-deterministic-challenge)) to send to _Client_ and responds with `{ challenge, sdr }` were `sdr` is the [selective disclosure request](#request) defined by the _Service_.
+1. _Client_ sends `POST /request-signup { did }` to _Service_, where `did` is _User_'s DID
+2. _Service_ creates a deterministic _challenge_ (see [How to calculate a deterministic challenge](#how-to-calculate-a-deterministic-challenge)) to send to _Client_ and responds with `{ challenge, sdr }` were `sdr` is the [selective disclosure request](#request) defined by the _Service_. The `sdr` MUST be sent in a signed JWT format.
 3. If `sdr`, _Client_ obtains the information required, and builds the [selective disclosure response](#response)
 4. _Client_ builds a JWT with the following payload:
 ```javascript
@@ -71,7 +71,7 @@ This section is OPTIONAL, it depends on the service needings. Some services may 
 }
 ```
 and prompts the _User_ to sign it with her `did`'s private key.
-5. _Client_ sends  `POST /sign-up { response: jwt }` to _Service_
+5. _Client_ sends  `POST /signup { response: jwt }` to _Service_
 6. _Service_ verifies JWT signature, checks if the received `challenge` is ok (by calculating the deterministic one again), and performs business logic over the `sdr`. If it is a valid user, it logges her in by creating an _access token_ and a _refresh token_.
   - The _access token_ is a JWT signed with the service private key. The JWT MUST have, at least, the following payload:
 ```javascript
@@ -278,7 +278,7 @@ Then, the client browser will send the cookie on every request.
 
 ##### Body
 
-It must be placed in the body of the request as a `refresh-token` field.
+It must be placed in the body of the request as a `refreshToken` field.
 
 For example:
 
@@ -287,7 +287,7 @@ For example:
   Host: server.example.com
 
   {
-    refresh-token: 'theRefreshToken'
+    refreshToken: 'theRefreshToken'
   }
 ```
 
