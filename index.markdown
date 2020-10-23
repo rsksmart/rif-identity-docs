@@ -13,14 +13,14 @@ The main goal of RIF Identity is to protect users’ personal data, empowering t
 
 ## Table of contents
 
-- [Self-sovereign identity](./ssi)
-    - [Specs](./ssi/specs)
-    - [Architecture](./ssi/architecture)
-    - [Libraries](./ssi/libraries)
-    - [Services](./ssi/services)
-    - [Applications](./ssi/applications)
+- [Self-sovereign identity](ssi)
+    - [Specs](ssi/specs)
+    - [Architecture](ssi/architecture)
+    - [Libraries](ssi/libraries)
+    - [Services](ssi/services)
+    - [Applications](ssi/applications)
     - [FAQ](ssi/faq)
-- [Data Vault](./data-vault)
+- [Data Vault](data-vault)
 - rLogin
 - RIF Identity manager
 

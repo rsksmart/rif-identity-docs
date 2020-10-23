@@ -2,4 +2,6 @@
 layout: default
 ---
 
-## RSK Ethr DID - handle Ethr DID method procedures in RSK network
+## RSK Ethr DID
+
+- handle Ethr DID method procedures in RSK network
