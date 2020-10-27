@@ -38,7 +38,7 @@ The motivation of this protocol is to provide user centric registration and auth
 
 - Users are identified by their unique blockchain addresses
 - Users hold their private information in user-centric services, or even fully-decentralized platforms
-- Services may require specific user's information to provide access to different users
+- Services may require specific user's information to grant access to the service
 - Services verify the integrity and authenticity of the information shared by the user
 - Services perform different logic depending on the designed authentication model (we call this _the business logic_)
 - Users can provide services all required information with no need of third-party services
