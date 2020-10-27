@@ -6,10 +6,9 @@ layout: default
 
 A challenge–response authentication is a family of protocols in which one party presents a question ("challenge") and another party must provide a valid answer ("response") to be authenticated. {% include ref.html id="10" %}
 
-DID Auth is a protocol that allows asking the controller of an account to sign a random message, thus demonstrating control of the account at the time of the question. This protocol is used as a login> it allows detecting that the user is in control of the account at the time of access to the application.
+DID Auth is a protocol that allows asking the controller of an account to sign a random message, thus demonstrating control of the account at the time of the question. This protocol used as a login method checks that the user controls the account at the time of access to the application.
 
-Additionally, it allows the application to request specific data at the time of registration, for example the user's email or telephone number. These requested data follow a specific standard, which allows the client to provide it in a unified way and even cryptographically signed by a third party. That is, the application can ask the user for verifiable credentials, identifying them by their type in a unique way.
-
+Additionally, it allows the application to request specific data at the time of registration, for example the user's email or phone number. These requested data follow a specific standard, which allows the client to provide it in a unified way and even cryptographically signed by a third party. This means that the application can ask the user for verifiable credentials, identifying them by their type in a unique way.
 ### Table of contents
 
 - [State of the art](#state-of-the-art)
