@@ -6,6 +6,10 @@ layout: default
 
 A challenge–response authentication is a family of protocols in which one party presents a question ("challenge") and another party must provide a valid answer ("response") to be authenticated. {% include ref.html id="10" %}
 
+DID Auth is a protocol that allows asking the controller of an account to sign a random message, thus demonstrating control of the account at the time of the question. This protocol is used as a login> it allows detecting that the user is in control of the account at the time of access to the application.
+
+Additionally, it allows the application to request specific data at the time of registration, for example the user's email or telephone number. These requested data follow a specific standard, which allows the client to provide it in a unified way and even cryptographically signed by a third party. That is, the application can ask the user for verifiable credentials, identifying them by their type in a unique way.
+
 ### Table of contents
 
 - [State of the art](#state-of-the-art)
@@ -24,82 +28,95 @@ A challenge–response authentication is a family of protocols in which one part
 
 ### State of the art
 
-Nowadays, authentication is handled in a centralized way. Most applications delegate the process of authenticating users to third-party services ([OIDC](https://openid.net/connect/)), and the authenticity of that information relies on those services providers. The problem with this type of authentication is that the user's information is not controlled by the user, the third-party services are those who control it. In the new web 3.0, applications will not trust in data that is not controlled by its owner, even the users will ask to disclose the minumum amount of information they can, that's why a new protocol is required.
+Nowadays, authentication is handled in a centralized way. Most applications delegate the process of authenticating users to third-party services, like [OIDC](https://openid.net/connect/), relaying the authenticity of that information on those services providers. The users' information is not controlled by the users theirselves, the third-party services control it.
+
+We believe users are not going to trust their private information to third-parties services anymore, nor applications will trust in data provided by centralized services. In addition, users will ask to disclose the minimum amount of information they can. This is the Web 3.0.
 
 ### Motivation
 
-The motivation of this protocol is to provide user centric registration and authentication mechanisms to be used by services of the web 3.0. We identify two main type of services: _open_ (public access) and _permissioned_ (the user must provide certain information to access it). This protocol allows an external service to prove that the user is in control of their did and, optionally, enables the application to ask the user to share specific private information associated to their DID, in order to register them.
-If it is a permissioned service, it may ask for verified user related information (ie: Verifiable Credentials{% include ref.html id="7" %}) and check if the shared information has been issued by reliable entities.
+The motivation of this protocol is to provide user centric registration and authentication mechanisms to be used by services of the web 3.0 considering:
+
+- Users are identified by their unique blockchain addresses
+- Users hold their private information in user-centric services, or even fully-decentralized platforms
+- Services may require specific user's information to provide access to different users
+- Services verify the integrity and authenticity of the information shared by the user
+- Services perform different logic depending on the designed authentication model (we call this _the business logic_)
+- Users can provide services all required information with no need of third-party services
+- Services and clients in this protocol share a standard way to name particular type of data - we call this _standard schemas_
+
+We identify two main type of services: _permissioned services_, those which require user to provide certain information to access it, and _open services_, which do not require extra info apart from the user's blockchain address.
+
+This protocol allows services to prove that the user is in control of their blockchain account (their Decentralized Identifier {% include ref.html id="2" %}) and, optionally, enables the application require the user to share specific private information associated to their account (their Verifiable Credentials {% include ref.html id="7" %}), in order to register them performing a custom _business logic_, enabling the service to verify that the shared information has been issued by reliable entities.
 
 It is designed to:
 
-- Register users by requesting them to share specific information that can be verified - this information can be used in business logic to grant or deny access
-- Allow the user to opt-in or out to the information - it is a user-centric protocol, the user decides wether to share the information or not
-- Authenticate a user by proving that the person/machine controls a specific did
-- Provide an _access token_ to the user that can be reused during a certain amount of time - wallet systems usually request user action to sign messages, enabling reusing access token reduces the amount of signatures required and improves the user experience
+1. Register users by requesting them to share specific information that can be verified - this information can be used in business logic to grant or deny access
+2. Allow the user to opt-in to share their information - it is a user-centric protocol, the user decides wether to share the information or not
+3. Authenticate a user by proving they control a specific DID
+4. Provide an _access token_ to the user that can be reused over time - wallet systems usually request user action to sign messages. Lowering this actions improves the user experience. Enabling reusing access token reduces the amount of signatures required.
 
+This protocol was inspired by:
 
-This protocol is based on the following specifications:
 - CHAP{% include ref.html id="11" %} authentication protocol
 - OAuth 2.0 Authorization Framework{% include ref.html id="13" %}.
-- Decentralized Identifiers (DIDs) v1.0 {% include ref.html id="2" %}
-- W3C Verifiable Credentials model {% include ref.html id="7" %}
-- [uPort selective disclosure implementation](https://developer.uport.me/flows/selectivedisclosure)
+- Decentralized Identifiers (DIDs) v1.0 {% include ref.html id="2" %}.
+- W3C Verifiable Credentials model {% include ref.html id="7" %}.
+- uPort selective disclosure [implementation](https://developer.uport.me/flows/selectivedisclosure)
 - W3C Verifiable Credentials JSON Schema Specification {% include ref.html id="12" %}
 
 Initially, it is designed to use HTTPS as the message transport layer, but it can be ported to a different one.
 
-### Signup
+### Sign up
 
-Services usually need to register users before letting them in. This means the service requires some specific information to be shared by the user (ie: user's email).
+Services usually register users before letting them in. This means the service requires some specific information to be shared by the user (ie: user's email).
 
-> This part of the protocol is OPTIONAL, it depends on the service needs. Some services may not need to register users before letting them enter in.
+Requiring information to the user is OPTIONAL, it depends on the service needs. Some services may not need to register users before letting them enter in. This lets identify the service in one of the two groups: _permissioned_ or _open_.
 
 1. _Client_ sends `POST /request-signup { did }` to _Service_, where `did` is _User_'s DID
-2. _Service_ creates a random deterministic* _challenge_ to send to _Client_ and responds with `{ challenge, sdr }` were `sdr` is the [selective disclosure request](#request) defined by the _Service_. The `sdr` MUST be sent in a signed JWT format.
-3. If `sdr`, _Client_ obtains the information required, and builds the [selective disclosure response](#response)
+2. _Service_ creates a random deterministic* _challenge_. Responds with `{ challenge, sdr? }` were `sdr?` is the OPTIONAL [selective disclosure request](#request) defined by the _Service_. [[[The `sdr` MUST be sent in a signed JWT format --- WHY?]]]
+3. If `sdr`, _Client_ obtains the information required from the user's desired service or platform (for example, from the [RIF Data Vault]({{ site.baseurl }}/data-vault)), and builds a [selective disclosure](#response) (response)
 4. _Client_ builds a JWT with the following payload:
-```javascript
-{
-  iss: `${userDid}`,
-  aud: `${serviceUrl}`,
-  exp: `${now + 2 min}`,
-  nbf: `${now}`,
-  iat: `${now}`,
-  challenge: `${receivedChallenge}`,
-  sdr: `${builtSdr}`
-}
-```
-and prompts the _User_ to sign it with its `did`'s private key.
-5. _Client_ sends  `POST /signup { response: jwt }` to _Service_
-6. _Service_ verifies JWT signature, checks if the received `challenge` matches the requested one, and performs business logic over the `sdr`. If all the validations pass, it logges the user in by creating an _access token_ and a _refresh token_.
-  - The _access token_ is a JWT signed with the service private key. The JWT MUST have, at least, the following payload:
-```javascript
-{
-  iss: `${serviceDid}`,
-  aud: `${serviceUrl}`,
-  sub: `${userDid}`
-  exp: `${now + 10 min}`, // should be shorter than 15 minutes
-  nbf: `${now}`,
-  iat: `${now}`,
-  // extra information that could be useful for the use case such as user metadata
-}
-```
-  - The _refresh token_ is an opaque string (could be a random one) that will be associated to user session data in the server. Long expiration.
-7. _Client_ authenticates next HTTPS requests using the received _access token_. See [how to send access tokens](#acess-token).
-8. If the _access token_ is not expired, _Service_ authorises the request, if not, it answers with an HTTP 401 with the expired token error message.
-9. If HTTP 401, _Client_ sends `POST /refresh-token` to _Service_ with the `refresh token`. See [how to send refresh tokens](#refresh-token).
-10. _Service_ validates the _refresh token_ and the current session status, if valid, issues new _access token_ (with same data but new expiration), invalidates the received _refresh token_ and issues a new one.
-11. _Client_ authenticates next HTTPS requests using the received _access token_.
-12. _Service_ authorises the request.
+  ```javascript
+  {
+    iss: `${userDid}`,
+    aud: `${serviceUrl}`,
+    exp: `${now + 2 min}`,
+    nbf: `${now}`,
+    iat: `${now}`,
+    challenge: `${receivedChallenge}`,
+    sd?: `${builtSd}`
+  }
+  ```
+  where `sd` is the selective disclosure and is set if `sdr` was asked.
+5. _User_ signs the JWT with the DID controller's private key. _Client_ sends  `POST /signup { response: jwt }` to _Service_
+6. _Service_ verifies JWT signature, compares by equality the received `challenge` with the requested one, and performs business logic over the `sdr`. If business logic is successful, it logs the user in by creating an _access token_ and a _refresh token_:
+  - The _access token_ is a JWT signed with the service controller DID's private key. The JWT MUST have, at least, the following payload:
+    ```javascript
+    {
+      iss: `${serviceDid}`,
+      aud: `${serviceUrl}`,
+      sub: `${userDid}`
+      exp: `${now + 10 min}`, // should be shorter than 15 minutes
+      nbf: `${now}`,
+      iat: `${now}`
+    }
+    ```
+    Other claims could be useful for storing user metadata and other use case related information.
+  - The _refresh token_ is an opaque string (could be a random one) that will be associated to user session data in the server. It has a long expiration
+  - The HTTP status is 200 and the body is
+    ```javascript
+    { accessToken, refreshToken }
+    ```
 
-![did auth]({{ site.baseurl }}/assets/img/ssi/10_did_sign_up.png)
+See [authenticating requests](#authenticating-requests) to understand how to user _access_ and _refresh_ tokens.
+
+![did auth]({{ site.baseurl }}/assets/img/ssi/10_did_auth_sign_up.png)
 
 The selective disclosure request is optional and it depends on the service needings.
-- Open apps: it needs just a proof that the user controls the did. In that case the `challenge` is enough
-- Permissioned apps: it needs a proof that the user controls the did and also proofs that the user fullfil the business needings. IE: be older than 18 years old.
+- Open apps need just a proof that the user is in control of the DID at the time of access. In that case the `challenge` is enough
+- Permissioned apps need a proof that the user is in control of the DID and also proofs that the user fullfil the business needs when disclosing their information. IE: be older than 18 years old.
 
-*The challenge may be non-deterministic, in that case, the service will have to store the challenges state. See [How to calculate a deterministic challenge](#how-to-calculate-a-deterministic-challenge)
+> *The challenge may be non-deterministic, in that case, the service will have to store the challenges state. See [How to calculate a deterministic challenge](#how-to-calculate-a-deterministic-challenge)
 
 #### Selective disclosure
 
@@ -107,17 +124,17 @@ It is strongly based on [uPort implementation](https://developer.uport.me/flows/
 
 The selective disclosure request must be compatible with [uPort DAF implementation](https://github.com/uport-project/daf/blob/d7714e5b3c2f00a90a861488deb2d37fba750173/packages/daf-selective-disclosure/src/action-handler.ts#L16-L23), so it must implement the following interfaces.
 
-##### Request 
+##### Request
 
-```
-export interface Claim {
+```typescript
+interface Claim {
   claimType: string
   claimValue: string
   reason?: string
   essential?: boolean
 }
 
-export interface SelectiveDisclosureRequest {
+interface SelectiveDisclosureRequest {
   issuer: string
   subject: string
   replyUrl?: string
@@ -126,23 +143,16 @@ export interface SelectiveDisclosureRequest {
 }
 ```
 
-`issuer`: the service did. REQUIRED
+- `issuer`: the service did. REQUIRED
+- `subject`: the user did (the one received when requesting the challenge). REQUIRED
+- `replyUrl`: the sign up endpoint.
+- `claims`: needed claims that may or not be part of a credential. IE: `preferredLanguage`.
+- `credentials`: array of W3C Verifiable Credentials JSON Schema names. Those schemas definitions will be published in an open repository in Github. IE: `EmailCredential`, `BirthdateCredential`.
 
-`subject`: the user did (the one received when requesting the challenge). REQUIRED
+##### Response
 
-`replyUrl`: the sign up endpoint.
-
-`claims`: needed claims that may or not be part of a credential. IE: `preferredLanguage`.
-
-`credentials`: array of W3C Verifiable Credentials JSON Schema names. Those schemas definitions will be published in an open repository in Github. IE: `EmailCredential`, `BirthdateCredential`.
-
-
-##### Response 
-
-```
-import { VerifiableCredential } from 'did-jwt-vc'
-
-export interface SelectiveDisclosureResponse {
+```typescript
+interface SelectiveDisclosureResponse {
   issuer: string
   subject: string
   claims?: Claim[]
@@ -150,60 +160,57 @@ export interface SelectiveDisclosureResponse {
 }
 ```
 
-`issuer`: the user did. REQUIRED
-
-`subject`: the service did. REQUIRED
-
-`claims`: requested claims. IE: `{ claimType: 'preferredLanguage', claimValue: 'english' }`
-
-`credentials`: array of W3C Verifiable Credentials that implements the requested JSON schemas
-
+- `issuer`: the user did. REQUIRED
+- `subject`: the service did. REQUIRED
+- `claims`: requested claims. IE: `{ claimType: 'preferredLanguage', claimValue: 'english' }`
+- `credentials`: array of W3C Verifiable Credentials that implements the requested JSON schemas
 
 ### Login
+
+Services should use _login_ after [registering](#register) users. This means the service already obtained the information required to let the user access the service.
 
 1. _Client_ sends `POST /request-auth { did }` to _Service_, where `did` is _User_'s DID
 2. _Service_ creates a random deterministic* _challenge_ to send to _Client_ and responds with `{ challenge }`.
 3. _Client_ receives _Service_'s `challenge` and creates a JWT{% include ref.html id="1" %} with the following payload:
-```javascript
-{
-  iss: `${userDid}`,
-  aud: `${serviceUrl}`,
-  exp: `${now + 2 min}`,
-  nbf: `${now}`,
-  iat: `${now}`,
-  challenge: `${receivedChallenge}`,
-}
-```
-_Client_ prompts the _User_ to sign it with its `did`'s private key.
-4. _Client_ sends  `POST /auth { response: jwt }` with the just signed JWT.
-5. _Service_ verifies JWT signature, checks if the received `challenge` matches the requested one and, if necessary, performs business logic over the `did` and the information related to it saved by the _Service_. If it is a valid user, it creates an _access token_ and a _refresh token_. 
-  - The _access token_ is a JWT signed with the service private key. The JWT MUST have, at least, the following payload:
-```javascript
-{
-  iss: `${serviceDid}`,
-  aud: `${serviceUrl}`,
-  sub: `${userDid}`
-  exp: `${now + 10 min}`, // should be shorter than 15 minutes
-  nbf: `${now}`,
-  iat: `${now}`,
-  // extra information that could be useful for the use case such as user metadata
-}
-```
-  - The _refresh token_ is an opaque string (could be a random one) that will be associated to user session data in the server. Long expiration.
-6. _Client_ authenticates next HTTPS requests using the received _access token_. See [how to send access tokens](#acess-token).
-7. If the _access token_ is not expired, _Service_ authorises the request, if not, it answers with an HTTP 401 with the expired token error message.
-8. If HTTP 401, _Client_ sends `POST /refresh-token` to _Service_ with the `refresh token`. See [how to send refresh tokens](#refresh-token).
-9. _Service_ validates the _refresh token_ and the current session status, if valid, issues new _access token_ (with same data but new expiration), invalidates the received _refresh token_ and issues a new one.
-10. _Client_ authenticates next HTTPS requests using the just received _access token_.
-11. _Service_ authorises the request.
+  ```javascript
+  {
+    iss: `${userDid}`,
+    aud: `${serviceUrl}`,
+    exp: `${now + 2 min}`,
+    nbf: `${now}`,
+    iat: `${now}`,
+    challenge: `${receivedChallenge}`,
+  }
+  ```
+  _Client_ prompts the _User_ to sign it with DID controller's private key.
+5. _Client_ sends  `POST /auth { response: jwt }` with the just signed JWT.
+6. _Service_ verifies JWT signature, checks if the received `challenge` matches the requested one and, if necessary, performs business logic over the `did` and the information related to it saved by the _Service_. If it is a valid user, it creates an _access token_ and a _refresh token_ - see ([register](#register) to understand required token JWT payload format)
 
-*The challenge may be non-deterministic, in that case, the service will have to store the challenges state. See [How to calculate a deterministic challenge](#how-to-calculate-a-deterministic-challenge)
+See [authenticating requests](#authenticating-requests) to understand how to user _access_ and _refresh_ tokens.
 
-![did auth]({{ site.baseurl }}/assets/img/ssi/08_did_auth.png)
+> *The challenge may be non-deterministic, in that case, the service will have to store the challenges state. See [How to calculate a deterministic challenge](#how-to-calculate-a-deterministic-challenge)
+
+![did auth]({{ site.baseurl }}/assets/img/ssi/08_did_auth_login.png)
+
+### Authenticating requests
+
+After the user is registered and has logged in (meaning the user is holding an _access token_ and a _refresh token_) the flow for authenticating following requests is:
+
+7. _Client_ authenticates next HTTP requests using the received _access token_. See [how to send access tokens](#acess-token).
+8. _Service_ receives access token. If the _access token_ is not expired, it authorizes the request. If not, it answers with an HTTP 401 with `"Expired access token"` string as HTTP body.
+9. If _Client_ receives HTTP 401, sends `POST /refresh-token` to _Service_ including the _refresh token_. See [how to send refresh tokens](#refresh-token).
+10. _Service_ validates the _refresh token_ and the current session status. If valid, issues new _access token_ (with same data but new expiration), invalidates the received _refresh token_ and issues a new one. The HTTP status is 200 and the body is
+  ```javascript
+  { accessToken, refreshToken }
+  ```
+11. _Client_ authenticates next HTTP requests using the received _access token_.
+12. _Service_ authorizes the request.
+
+![did auth]({{ site.baseurl }}/assets/img/ssi/11_did_auth_access.png)
 
 ### Logout
 
-It will invalidate the current `did` session, so next time `/refresh-token` is invoked, it will not generate a new _access token_.
+This operation will invalidate the current user's session. The next time `/refresh-token` is invoked, it will not generate a new _access token_.
 
 1. _Client_s sends `POST /logout` with the current _access token_
 2. If the _access token_ is valid, _Service_ marks the associated _refresh token_ as logged out.
@@ -223,8 +230,8 @@ NOTE: The logout process does not invalidate the current _access token_, it will
 
 ## Open work
 
-- Build a repository of W3C Verifiable Credentials JSON Schema definition
-- This protocol can be abstracted from the transport layer
+- Build a repository and define discovery method held by the client for W3C Verifiable Credentials JSON Schema definitions when `sdr` is requested
+- Abstract the protocol from the transport layer
 
 ## Appendix
 
