@@ -45,7 +45,7 @@ The motivation of this protocol is to provide user centric registration and auth
 
 We identify two main type of services: _permissioned services_, those which require user to provide certain information to access it, and _open services_, which do not require extra info apart from the user's blockchain address.
 
-This protocol allows services to prove that the user is in control of their blockchain account (their Decentralized Identifier {% include ref.html id="2" %}) and, optionally, enables the application require the user to share specific private information associated to their account (their Verifiable Credentials {% include ref.html id="7" %}), in order to register them performing a custom _business logic_, enabling the service to verify that the shared information has been issued by reliable entities.
+This protocol allows services to prove that the user is in control of their Decentralized Identifier -DID- {% include ref.html id="2" %} (thus, their blockchain account) and, optionally, enables the application require the user to share specific private information associated to their account (their Verifiable Credentials {% include ref.html id="7" %}), in order to register them performing a custom _business logic_, enabling the service to verify that the shared information has been issued by reliable entities.
 
 It is designed to:
 
