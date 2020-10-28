@@ -111,7 +111,7 @@ See [authenticating requests](#authenticating-requests) to understand how to use
 
 ![did auth]({{ site.baseurl }}/assets/img/ssi/10_did_auth_sign_up.png)
 
-The selective disclosure request is optional and it depends on the service needings.
+The selective disclosure request is optional and it depends on the service needs.
 - Open apps need just a proof that the user is in control of the DID at the time of access. In that case the `challenge` is enough
 - Permissioned apps need a proof that the user is in control of the DID and also proofs that the user fullfil the business needs when disclosing their information. IE: be older than 18 years old.
 
