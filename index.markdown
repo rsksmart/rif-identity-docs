@@ -52,6 +52,7 @@ The main goal of RIF Identity is to protect users’ personal data in a privacy 
 - [Ethr DID dev utils](https://github.com/rsksmart/ethr-did-utils)
 - [rLogin](https://github.com/rsksmart/rLogin)
 - [RIF Identity manager](https://github.com/rsksmart/rif-identity-manager)
+- [Wallet Connect POC](https://github.com/rsksmart/RSKWalletConnect)
 
 
 <!--
