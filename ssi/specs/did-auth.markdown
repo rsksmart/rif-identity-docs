@@ -35,7 +35,7 @@ We believe users are not going to trust their private information to third-parti
 
 The motivation of this protocol is to provide user centric registration and authentication mechanisms to be used by services of the web 3.0 considering:
 
-- Users are identified by their unique blockchain addresses
+- Users are identified by their unique Decentralized Identifiers -DID- and blockchain addresses
 - Users hold their private information in user-centric services, or even fully-decentralized platforms
 - Services may require specific user's information to grant access to the service
 - Services verify the integrity and authenticity of the information shared by the user
