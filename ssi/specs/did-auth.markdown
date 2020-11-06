@@ -35,7 +35,7 @@ We believe users are not going to trust their private information to third-parti
 
 The motivation of this protocol is to provide user centric registration and authentication mechanisms to be used by services of the web 3.0 considering:
 
-- Users are identified by their unique blockchain addresses
+- Users are identified by their unique Decentralized Identifiers -DID- and blockchain addresses
 - Users hold their private information in user-centric services, or even fully-decentralized platforms
 - Services may require specific user's information to grant access to the service
 - Services verify the integrity and authenticity of the information shared by the user
@@ -45,7 +45,7 @@ The motivation of this protocol is to provide user centric registration and auth
 
 We identify two main type of services: _permissioned services_, those which require user to provide certain information to access it, and _open services_, which do not require extra info apart from the user's blockchain address.
 
-This protocol allows services to prove that the user is in control of their blockchain account (their Decentralized Identifier {% include ref.html id="2" %}) and, optionally, enables the application require the user to share specific private information associated to their account (their Verifiable Credentials {% include ref.html id="7" %}), in order to register them performing a custom _business logic_, enabling the service to verify that the shared information has been issued by reliable entities.
+This protocol allows services to prove that the user is in control of their Decentralized Identifier -DID- {% include ref.html id="2" %} (thus, their blockchain account) and, optionally, enables the application require the user to share specific private information associated to their account (their Verifiable Credentials {% include ref.html id="7" %}), in order to register them performing a custom _business logic_, enabling the service to verify that the shared information has been issued by reliable entities.
 
 It is designed to:
 
@@ -72,7 +72,7 @@ Services usually register users before letting them in. This means the service r
 Requiring information to the user is OPTIONAL, it depends on the service needs. Some services may not need to register users before letting them enter in. This lets identify the service in one of the two groups: _permissioned_ or _open_.
 
 1. _Client_ sends `POST /request-signup { did }` to _Service_, where `did` is _User_'s DID
-2. _Service_ creates a random deterministic* _challenge_. Responds with `{ challenge, sdr? }` were `sdr?` is the OPTIONAL [selective disclosure request](#request) defined by the _Service_. [[[The `sdr` MUST be sent in a signed JWT format --- WHY?]]]
+2. _Service_ creates a random deterministic* _challenge_. Responds with `{ challenge, sdr? }` were `sdr?` is the OPTIONAL [selective disclosure request](#request) defined by the _Service_. The `sdr` MUST be sent in a signed JWT format.
 3. If `sdr`, _Client_ obtains the information required from the user's desired service or platform (for example, from the [RIF Data Vault]({{ site.baseurl }}/data-vault)), and builds a [selective disclosure](#response) (response)
 4. _Client_ builds a JWT with the following payload:
   ```javascript
@@ -111,7 +111,7 @@ See [authenticating requests](#authenticating-requests) to understand how to use
 
 ![did auth]({{ site.baseurl }}/assets/img/ssi/10_did_auth_sign_up.png)
 
-The selective disclosure request is optional and it depends on the service needings.
+The selective disclosure request is optional and it depends on the service needs.
 - Open apps need just a proof that the user is in control of the DID at the time of access. In that case the `challenge` is enough
 - Permissioned apps need a proof that the user is in control of the DID and also proofs that the user fullfil the business needs when disclosing their information. IE: be older than 18 years old.
 
