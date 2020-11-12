@@ -5,9 +5,9 @@ layout: default
 
 ## Self-sovereign identity
 
-- [Specs](./ssi/specs)
-- [Architecture](./ssi/architecture)
-- [Libraries](./ssi/libraries)
-- [Services](./ssi/services)
-- [Applications](./ssi/applications)
-- [FAQ](ssi/faq)
+- [Specs](./specs)
+- [Architecture](./architecture)
+- [Libraries](./libraries)
+- [Services](./services)
+- [Applications](./applications)
+- [FAQ](./faq)
