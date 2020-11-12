@@ -20,12 +20,12 @@ The main goal of RIF Identity is to protect users’ personal data in a privacy 
     - [Specs](./ssi/specs)
     - Architecture <!--[Architecture](./ssi/architecture) -->
     - [Libraries](./ssi/libraries)
-        - Mnemonic module<!--[Mnemonic module](./ssi/libraries/mnemonics) --> - identity derivation tools using mnemonic phrases
-        - RSK Ethr DID<!--[RSK Ethr DID](./ssi/libraries/ethr-did) --> - handle Ethr DID method procedures in RSK network
+        - Mnemonic module <!--[Mnemonic module](./ssi/libraries/mnemonics) --> - identity derivation tools using mnemonic phrases
+        - RSK Ethr DID <!--[RSK Ethr DID](./ssi/libraries/ethr-did) --> - handle Ethr DID method procedures in RSK network
         - uPort DAF bindings<!--[uPort DAF bindings](./ssi/libraries/daf) --> - use uPort agent with [RIF identity multi identity model](./ssi/specs/#multi-identity-model)
-        - RIF Identity Core<!--[RIF Identity Core](./ssi/libraries/core) --> - implementation of [RIF Identity protocols](./ssi/specs/#protocols) using DAF agent
+        - RIF Identity Core <!--[RIF Identity Core](./ssi/libraries/core) --> - implementation of [RIF Identity protocols](./ssi/specs/#protocols) using DAF agent
         - [Express DID Auth](./ssi/libraries/express-did-auth) - handle user authentication using W3C credentials
-        - Node Utils<!--[Node Utils](./ssi/libraries/node-utils) --> - a suite of handy utils to use in Node.js services
+        - Node Utils <!--[Node Utils](./ssi/libraries/node-utils) --> - a suite of handy utils to use in Node.js services
     - [Services](./ssi/services)
         - [Convey service](./ssi/services/convey-service) - public transport layer for JWTs using IPFS
         - Issuer service <!-- [Issuer service](./ssi/services/issuer-service) --> - serves for an application that allows receiving credential issuance requests and approving them manually
