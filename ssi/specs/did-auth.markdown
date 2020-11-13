@@ -74,22 +74,20 @@ Requiring information to the user is OPTIONAL, it depends on the service needs. 
 1. _Client_ sends `POST /request-signup { did }` to _Service_, where `did` is _User_'s DID
 2. _Service_ creates a random deterministic* _challenge_. Responds with `{ challenge, sdr? }` were `sdr?` is the OPTIONAL [selective disclosure request](#request) defined by the _Service_. The `sdr` MUST be sent in a signed JWT format.
 3. If `sdr`, _Client_ obtains the information required from the user's desired service or platform (for example, from the [RIF Data Vault]({{ site.baseurl }}/data-vault)), and builds a [selective disclosure](#response) (response)
-4. _Client_ builds a JWT with the following payload:
-  ```javascript
-  {
-    iss: `${userDid}`,
-    sub: `${serviceDid}`,
-    aud: `${serviceUrl}`,
-    exp: `${now + 2 min}`,
-    nbf: `${now}`,
-    iat: `${now}`,
-    challenge: `${receivedChallenge}`,
-    sd?: `${builtSd}`
-  }
+4. _Client_ signs a message with  the following format using `personal_sign` as per EIP-191{% include ref.html id="15" %} and EIP-155{% include ref.html id="6" %}:
   ```
-  where `sd` is the selective disclosure and is set if `sdr` was asked.
-5. _User_ signs the JWT with the DID controller's private key. _Client_ sends  `POST /signup { response: jwt }` to _Service_
-6. _Service_ verifies JWT signature, compares by equality the received `challenge` with the requested one, and performs business logic over the `sdr`. If business logic is successful, it logs the user in by creating an _access token_ and a _refresh token_:
+  Login to <web domain> - <Date and time in UTC format>
+  Verification code: <challenge>
+  My credentials are: <array of JWT credentials separated by commas>
+  ```
+  where `<web domain` is the site DNS domain and ` <array of JWT credentials>` is the selective disclosure and is set if `sdr` was asked*. For example
+  ```
+  Login to taringa.net - Fri Nov 13 2020 16:01:28
+  Verification code: 4531
+  My credentials are: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjpyc2s6MHhjMmE0MWY3NmNhY2ZhOTMzYzM0OTY5NzdmMjE2MDk0NGVmOGMyZGUzIiwicm9sZSI6IlJJRiBEZXZlbG9wZXIiLCJpc3MiOiJkaWQ6ZXRocjpyc2s6MHg0Y2MxNzc0MjI2NDNjMzgxNGE5ZThhNzY1NDk4NTIxYzUyMDRmMTExIiwiaWF0IjoxNTE2MjM5MDIyfQ.3sauMI60RVqc1QrvooZnNnmjAMiHj4qt5ZSEYhOULvA,eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjpyc2s6MHhjMmE0MWY3NmNhY2ZhOTMzYzM0OTY5NzdmMjE2MDk0NGVmOGMyZGUzIiwic2tpbGxzIjoiQmxvY2tjaGFpbiIsImlzcyI6ImRpZDpldGhyOnJzazoweDRjYzE3NzQyMjY0M2MzODE0YTllOGE3NjU0OTg1MjFjNTIwNGYxMTEiLCJpYXQiOjE1MTYyMzkwMjJ9.SgPPVFj0lU9E_dq_aPOmrf_CZljNh1ZaEhAufAbIgFY
+  ```
+5. _User_ signs the message with the DID controller's private key. _Client_ sends  `POST /signup { response: signature }` to _Service_
+6. _Service_ verifies message signature, compares by equality the received `challenge` with the requested one, validates the given date and domain, and performs business logic over the selective disclosure. If business logic is successful, it logs the user in by creating an _access token_ and a _refresh token_:
   - The _access token_ is a JWT signed with the service controller DID's private key. The JWT MUST have, at least, the following payload:
     ```javascript
     {
@@ -107,6 +105,8 @@ Requiring information to the user is OPTIONAL, it depends on the service needs. 
     ```javascript
     { accessToken, refreshToken }
     ```
+
+> *The credential format is not friendly for the user: they cannot understand what they are signing. Future work will research on finding a more user-oriented form to display the JWTs but with current technology this is what we can do. Ideally EIP-712 could be used to show display JWTs in user-oriented form.
 
 See [authenticating requests](#authenticating-requests) to understand how to user _access_ and _refresh_ tokens.
 
@@ -171,21 +171,14 @@ Services should use _login_ after [registering](#register) users. This means the
 
 1. _Client_ sends `POST /request-auth { did }` to _Service_, where `did` is _User_'s DID
 2. _Service_ creates a random deterministic* _challenge_ to send to _Client_ and responds with `{ challenge }`.
-3. _Client_ receives _Service_'s `challenge` and creates a JWT{% include ref.html id="1" %} with the following payload:
-  ```javascript
-  {
-    iss: `${userDid}`,
-    sub: `${serviceDid}`,
-    aud: `${serviceUrl}`,
-    exp: `${now + 2 min}`,
-    nbf: `${now}`,
-    iat: `${now}`,
-    challenge: `${receivedChallenge}`,
-  }
+3. _Client_ signs a message with  the following format using `personal_sign` as per EIP-191{% include ref.html id="15" %} and EIP-155{% include ref.html id="6" %}:
+  ```
+  Login to <web domain> - <Date and time in UTC format>
+  Verification code: <challenge>
   ```
   _Client_ prompts the _User_ to sign it with DID controller's private key.
-5. _Client_ sends  `POST /auth { response: jwt }` with the just signed JWT.
-6. _Service_ verifies JWT signature, checks if the received `challenge` matches the requested one and, if necessary, performs business logic over the `did` and the information related to it saved by the _Service_. If it is a valid user, it creates an _access token_ and a _refresh token_ - see ([register](#register) to understand required token JWT payload format)
+5. _Client_ sends  `POST /auth { response: signature }` with the just signed JWT.
+6. _Service_ verifies message signature, compares by equality the received `challenge` with the requested one, validates the given date and domain and, if necessary, performs business logic over the `did` and the information related to it saved by the _Service_. If it is a valid user, it creates an _access token_ and a _refresh token_ - see ([register](#register) to understand required token JWT payload format)
 
 See [authenticating requests](#authenticating-requests) to understand how to user _access_ and _refresh_ tokens.
 
