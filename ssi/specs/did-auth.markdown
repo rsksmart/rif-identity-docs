@@ -78,6 +78,7 @@ Requiring information to the user is OPTIONAL, it depends on the service needs. 
   ```javascript
   {
     iss: `${userDid}`,
+    sub: `${serviceDid}`,
     aud: `${serviceUrl}`,
     exp: `${now + 2 min}`,
     nbf: `${now}`,
@@ -174,6 +175,7 @@ Services should use _login_ after [registering](#register) users. This means the
   ```javascript
   {
     iss: `${userDid}`,
+    sub: `${serviceDid}`,
     aud: `${serviceUrl}`,
     exp: `${now + 2 min}`,
     nbf: `${now}`,
