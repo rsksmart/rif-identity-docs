@@ -171,7 +171,7 @@ Services should use _login_ after [registering](#register) users. This means the
 
 1. _Client_ sends `POST /request-auth { did }` to _Service_, where `did` is _User_'s DID
 2. _Service_ creates a random deterministic* _challenge_ to send to _Client_ and responds with `{ challenge }`.
-3. _Client_ signs a message with  the following format using `personal_sign` as per EIP-191{% include ref.html id="15" %} and EIP-155{% include ref.html id="6" %}:
+3. _Client_ signs a message with  the following format using `personal_sign` as per EIP-191{% include ref.html id="16" %} and EIP-155{% include ref.html id="15" %}:
   ```
   Login to <web domain> - <Date and time in UTC format>
   Verification code: <challenge>
