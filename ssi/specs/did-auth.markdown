@@ -76,13 +76,13 @@ Requiring information to the user is OPTIONAL, it depends on the service needs. 
 3. If `sdr`, _Client_ obtains the information required from the user's desired service or platform (for example, from the [RIF Data Vault]({{ site.baseurl }}/data-vault)), and builds a [selective disclosure](#response) (response)
 4. _Client_ pormpts user to sign a message with the following format using `personal_sign` as per EIP-191{% include ref.html id="16" %} and EIP-155{% include ref.html id="15" %}:
   ```
-Login to <web domain> - <Date and time in UTC format>
+Login to <web domain>
 Verification code: <challenge>
 My credentials are: <array of JWT credentials separated by commas>
   ```
   where `<web domain>` is the site DNS domain and `<array of JWT credentials>` is the selective disclosure (which is set if `sdr` was asked*). For example
   ```
-Login to taringa.net - Fri Nov 13 2020 16:01:28
+Login to taringa.net
 Verification code: 4531
 My credentials are: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjpyc2s6MHhjMmE0MWY3NmNhY2ZhOTMzYzM0OTY5NzdmMjE2MDk0NGVmOGMyZGUzIiwicm9sZSI6IlJJRiBEZXZlbG9wZXIiLCJpc3MiOiJkaWQ6ZXRocjpyc2s6MHg0Y2MxNzc0MjI2NDNjMzgxNGE5ZThhNzY1NDk4NTIxYzUyMDRmMTExIiwiaWF0IjoxNTE2MjM5MDIyfQ.3sauMI60RVqc1QrvooZnNnmjAMiHj4qt5ZSEYhOULvA,eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjpyc2s6MHhjMmE0MWY3NmNhY2ZhOTMzYzM0OTY5NzdmMjE2MDk0NGVmOGMyZGUzIiwic2tpbGxzIjoiQmxvY2tjaGFpbiIsImlzcyI6ImRpZDpldGhyOnJzazoweDRjYzE3NzQyMjY0M2MzODE0YTllOGE3NjU0OTg1MjFjNTIwNGYxMTEiLCJpYXQiOjE1MTYyMzkwMjJ9.SgPPVFj0lU9E_dq_aPOmrf_CZljNh1ZaEhAufAbIgFY
   ```
@@ -91,7 +91,6 @@ My credentials are: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjp
 POST /signup {
   did: <signer's DID>,
   sig: <message signature>,
-  timestamp: <Date and time in UTC format>,
   credentials: <array of JWT credentials> 
 }
   ```
@@ -100,7 +99,6 @@ POST /signup {
 { 
   "did": "did:ethr:rsk:0xa53...dec",
   "sig": "...",
-  "timestamp": "Fri Nov 13 2020 16:01:28",
   "credentials": [
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjpyc2s6MHhjMmE0MWY3NmNhY2ZhOTMzYzM0OTY5NzdmMjE2MDk0NGVmOGMyZGUzIiwicm9sZSI6IlJJRiBEZXZlbG9wZXIiLCJpc3MiOiJkaWQ6ZXRocjpyc2s6MHg0Y2MxNzc0MjI2NDNjMzgxNGE5ZThhNzY1NDk4NTIxYzUyMDRmMTExIiwiaWF0IjoxNTE2MjM5MDIyfQ.3sauMI60RVqc1QrvooZnNnmjAMiHj4qt5ZSEYhOULvA,eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjpyc2s6MHhjMmE0MWY3NmNhY2ZhOTMzYzM0OTY5NzdmMjE2MDk0NGVmOGMyZGUzIiwic2tpbGxzIjoiQmxvY2tjaGFpbiIsImlzcyI6ImRpZDpldGhyOnJzazoweDRjYzE3NzQyMjY0M2MzODE0YTllOGE3NjU0OTg1MjFjNTIwNGYxMTEiLCJpYXQiOjE1MTYyMzkwMjJ9.SgPPVFj0lU9E_dq_aPOmrf_CZljNh1ZaEhAufAbIgFY"
   ]
@@ -108,7 +106,7 @@ POST /signup {
   ```
 6. _Service_ receives the `response` and recovers the signer against this message (_Service_ needs the _User_'s DID to fetch the expected challenge):
   ```
-Login to {SERVICE_EXPECTED_DOMAIN} - {response.timestamp}
+Login to {SERVICE_EXPECTED_DOMAIN}
 Verification code: {EXPECTED_CHALLENGE}
 My credentials are: {response.credentials.join(',')}
   ```
@@ -198,7 +196,7 @@ Services should use _login_ after [registering](#register) users. This means the
 2. _Service_ creates a random deterministic* _challenge_ to send to _Client_ and responds with `{ challenge }`.
 3. _Client_ signs a message with  the following format using `personal_sign` as per EIP-191{% include ref.html id="16" %} and EIP-155{% include ref.html id="15" %}:
   ```
-Login to <web domain> - <Date and time in UTC format>
+Login to <web domain>
 Verification code: <challenge>
   ```
   _Client_ prompts the _User_ to sign it with DID controller's private key.
@@ -206,13 +204,12 @@ Verification code: <challenge>
   ```
 POST /auth {
   did: <signer's DID>,
-  sig: <message signature>,
-  timestamp: <Date and time in UTC format>
+  sig: <message signature>
 }
   ```
 6. _Service_ receives the `response` and recovers the signer against this message:
   ```
-Login to {SERVICE_EXPECTED_DOMAIN} - {response.timestamp}
+Login to {SERVICE_EXPECTED_DOMAIN}
 Verification code: {EXPECTED_CHALLENGE}
 My credentials are: {response.credentials.join(',')}
   ```
