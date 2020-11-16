@@ -80,7 +80,7 @@ Requiring information to the user is OPTIONAL, it depends on the service needs. 
   Verification code: <challenge>
   My credentials are: <array of JWT credentials separated by commas>
   ```
-  where `<web domain` is the site DNS domain and ` <array of JWT credentials>` is the selective disclosure and is set if `sdr` was asked*. For example
+  where `<web domain` is the site DNS domain and `<array of JWT credentials>` is the selective disclosure (which is set if `sdr` was asked*). For example
   ```
   Login to taringa.net - Fri Nov 13 2020 16:01:28
   Verification code: 4531
